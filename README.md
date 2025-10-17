@@ -1,44 +1,74 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# 🎬 YouTube Summarizer
 
-## YouTube Transcription App
+A modern, AI-powered web application that transforms YouTube videos into concise, readable summaries using Google's Gemini AI. Built with Next.js 15, TypeScript, and Tailwind CSS.
 
-This application allows you to transcribe YouTube videos by converting them to MP3 and using Google's Gemini AI for transcription.
+![YouTube Summarizer](https://img.shields.io/badge/Next.js-15.5.5-black?style=for-the-badge&logo=next.js)
+![TypeScript](https://img.shields.io/badge/TypeScript-5.0-blue?style=for-the-badge&logo=typescript)
+![Tailwind CSS](https://img.shields.io/badge/Tailwind_CSS-4.0-38B2AC?style=for-the-badge&logo=tailwind-css)
+![Gemini AI](https://img.shields.io/badge/Gemini_AI-2.5_Flash-4285F4?style=for-the-badge&logo=google)
 
-## Environment Variables
+## ✨ Features
 
-Create a `.env.local` file in the root directory with the following variables:
+- **🤖 AI-Powered Summarization**: Uses Google Gemini 2.5 Flash for intelligent video content analysis
+- **📱 Fully Responsive**: Beautiful UI that works seamlessly across all devices
+- **🎨 Modern Design**: Dark theme with glassmorphism effects and smooth animations
+- **📋 Copy to Clipboard**: One-click copying of generated summaries
+- **⚡ Fast Processing**: Direct video processing without file downloads
+- **🔒 Secure**: Environment-based API key management
+- **🎯 User-Friendly**: Intuitive interface with clear error handling
 
-```env
-GEMINI_API_KEY=your_gemini_api_key_here
-RAPIDAPI_KEY=your_rapidapi_key_here
-```
+## 🚀 Quick Start
 
-- **GEMINI_API_KEY**: Get your API key from [Google AI Studio](https://makersuite.google.com/app/apikey)
-- **RAPIDAPI_KEY**: Get your API key from [RapidAPI](https://rapidapi.com/CoolGuruji/api/youtube-to-mp3-download)
+### Prerequisites
 
-## Getting Started
+- Node.js 18+ 
+- Google Gemini API key
 
-First, run the development server:
+### Installation
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+1. **Clone the repository**
+   ```bash
+   git clone https://github.com/modamaan/YouTube-Summarizer.git
+   cd YouTube-Summarizer
+   ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+2. **Install dependencies**
+   ```bash
+   npm install
+   ```
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+3. **Set up environment variables**
+   
+   Create a `.env.local` file in the root directory:
+   ```env
+   GEMINI_API_KEY=your_gemini_api_key_here
+   ```
+   
+   Get your API key from [Google AI Studio](https://makersuite.google.com/app/apikey)
 
-## API Usage
+4. **Run the development server**
+   ```bash
+   npm run dev
+   ```
 
-### POST /api/transcribe
+5. **Open your browser**
+   
+   Navigate to [http://localhost:3000](http://localhost:3000)
 
-Transcribe a YouTube video by providing its URL.
+## 🛠️ Tech Stack
+
+- **Framework**: Next.js 15 with App Router
+- **Language**: TypeScript
+- **Styling**: Tailwind CSS 4.0
+- **AI**: Google Gemini 2.5 Flash
+- **Icons**: Lucide React
+- **Deployment**: Vercel-ready
+
+## 📡 API Reference
+
+### POST `/api/summarize`
+
+Generates a concise summary of a YouTube video.
 
 **Request Body:**
 ```json
@@ -51,23 +81,87 @@ Transcribe a YouTube video by providing its URL.
 ```json
 {
   "success": true,
-  "transcript": "The transcribed text from the video..."
+  "summary": "A concise 3-sentence summary of the video content..."
 }
 ```
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+**Error Response:**
+```json
+{
+  "error": "Error message describing what went wrong"
+}
+```
 
-## Learn More
+## 🎯 Usage
 
-To learn more about Next.js, take a look at the following resources:
+1. **Enter YouTube URL**: Paste any YouTube video URL into the input field
+2. **Click Summarize**: Hit the "Summarize Video" button to process
+3. **Get Summary**: Receive a concise 3-sentence summary
+4. **Copy & Share**: Use the copy button to share the summary
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+## 🔧 Configuration
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+### Environment Variables
 
-## Deploy on Vercel
+| Variable | Description | Required |
+|----------|-------------|----------|
+| `GEMINI_API_KEY` | Google Gemini API key for AI processing | ✅ Yes |
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+### Supported Video Types
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+- Public YouTube videos
+- Unlisted videos (with direct link)
+- Videos with audio content
+
+## 🚀 Deployment
+
+### Deploy on Vercel (Recommended)
+
+1. **Push to GitHub**
+   ```bash
+   git add .
+   git commit -m "Initial commit"
+   git push origin main
+   ```
+
+2. **Deploy on Vercel**
+   - Connect your GitHub repository to [Vercel](https://vercel.com)
+   - Add your `GEMINI_API_KEY` environment variable
+   - Deploy automatically
+
+### Other Platforms
+
+The app can be deployed on any platform that supports Next.js:
+- Netlify
+- Railway
+- DigitalOcean App Platform
+- AWS Amplify
+
+## 🤝 Contributing
+
+Contributions are welcome! Please feel free to submit a Pull Request.
+
+1. Fork the project
+2. Create your feature branch (`git checkout -b feature/AmazingFeature`)
+3. Commit your changes (`git commit -m 'Add some AmazingFeature'`)
+4. Push to the branch (`git push origin feature/AmazingFeature`)
+5. Open a Pull Request
+
+## 📝 License
+
+This project is open source and available under the [MIT License](LICENSE).
+
+## 🙏 Acknowledgments
+
+- [Google Gemini AI](https://ai.google.dev/) for powerful AI capabilities
+- [Next.js](https://nextjs.org/) for the amazing React framework
+- [Tailwind CSS](https://tailwindcss.com/) for utility-first styling
+- [Lucide](https://lucide.dev/) for beautiful icons
+
+## 📞 Support
+
+If you have any questions or run into issues, please [open an issue](https://github.com/modamaan/YouTube-Summarizer/issues) on GitHub.
+
+---
+
+Made with ❤️ by [Amaan](https://github.com/modamaan)
