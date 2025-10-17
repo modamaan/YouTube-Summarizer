@@ -1,5 +1,21 @@
 This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
 
+## YouTube Transcription App
+
+This application allows you to transcribe YouTube videos by converting them to MP3 and using Google's Gemini AI for transcription.
+
+## Environment Variables
+
+Create a `.env.local` file in the root directory with the following variables:
+
+```env
+GEMINI_API_KEY=your_gemini_api_key_here
+RAPIDAPI_KEY=your_rapidapi_key_here
+```
+
+- **GEMINI_API_KEY**: Get your API key from [Google AI Studio](https://makersuite.google.com/app/apikey)
+- **RAPIDAPI_KEY**: Get your API key from [RapidAPI](https://rapidapi.com/CoolGuruji/api/youtube-to-mp3-download)
+
 ## Getting Started
 
 First, run the development server:
@@ -17,6 +33,27 @@ bun dev
 Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
 
 You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+
+## API Usage
+
+### POST /api/transcribe
+
+Transcribe a YouTube video by providing its URL.
+
+**Request Body:**
+```json
+{
+  "youtubeUrl": "https://www.youtube.com/watch?v=VIDEO_ID"
+}
+```
+
+**Response:**
+```json
+{
+  "success": true,
+  "transcript": "The transcribed text from the video..."
+}
+```
 
 This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
 
