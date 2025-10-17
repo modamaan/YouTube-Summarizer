@@ -39,8 +39,9 @@ export default function Home() {
       }
 
       setResult(data);
-    } catch (err: any) {
-      setError(err.message || 'An error occurred');
+    } catch (err: unknown) {
+      const errorMessage = err instanceof Error ? err.message : 'An error occurred';
+      setError(errorMessage);
     } finally {
       setIsLoading(false);
     }
@@ -48,7 +49,7 @@ export default function Home() {
 
   const copyToClipboard = async () => {
     if (!result?.summary) return;
-    
+
     try {
       await navigator.clipboard.writeText(result.summary);
       setCopied(true);
@@ -99,7 +100,7 @@ export default function Home() {
                   </div>
                 </div>
               </div>
-              
+
               <button
                 type="submit"
                 disabled={isLoading || !youtubeUrl.trim()}
@@ -159,7 +160,7 @@ export default function Home() {
                   )}
                 </button>
               </div>
-              
+
               <div className="bg-white/5 rounded-lg sm:rounded-xl p-4 sm:p-6 border border-white/10">
                 <p className="text-slate-100 leading-relaxed text-sm sm:text-base lg:text-lg whitespace-pre-wrap break-words">
                   {result.summary}

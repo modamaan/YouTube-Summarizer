@@ -40,11 +40,13 @@ export async function POST(request: NextRequest) {
       success: true,
       summary,
     });
-  } catch (error: any) {
+  } catch (error: unknown) {
     console.error("Summarization error:", error);
 
+    const errorMessage = error instanceof Error ? error.message : String(error);
+
     // Check for quota/rate limiting
-    if (error.message?.includes("quota") || error.message?.includes("limit")) {
+    if (errorMessage.includes("quota") || errorMessage.includes("limit")) {
       return NextResponse.json(
         {
           error: "API quota exceeded. Please try again later.",
