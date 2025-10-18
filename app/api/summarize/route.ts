@@ -31,17 +31,17 @@ export async function POST(request: NextRequest) {
           mimeType: "video/*",
         },
       },
-      { text: "Summarize this YouTube video in 3 concise sentences" },
+      { text: "Please provide the complete transcript of this YouTube video. Include all spoken words and dialogue in chronological order." },
     ]);
 
-    const summary = result.response.text();
+    const transcript = result.response.text();
 
     return NextResponse.json({
       success: true,
-      summary,
+      transcript,
     });
   } catch (error: unknown) {
-    console.error("Summarization error:", error);
+    console.error("Transcription error:", error);
 
     const errorMessage = error instanceof Error ? error.message : String(error);
 
@@ -57,7 +57,7 @@ export async function POST(request: NextRequest) {
 
     return NextResponse.json(
       {
-        error: "Failed to summarize video. Please try again.",
+        error: "Failed to transcribe video. Please try again.",
       },
       { status: 500 }
     );

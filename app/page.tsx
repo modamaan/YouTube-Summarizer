@@ -3,15 +3,15 @@
 import { useState } from 'react';
 import { Copy, Check, Play, Sparkles } from 'lucide-react';
 
-interface SummaryResult {
+interface TranscriptResult {
   success: boolean;
-  summary: string;
+  transcript: string;
 }
 
 export default function Home() {
   const [youtubeUrl, setYoutubeUrl] = useState('');
   const [isLoading, setIsLoading] = useState(false);
-  const [result, setResult] = useState<SummaryResult | null>(null);
+  const [result, setResult] = useState<TranscriptResult | null>(null);
   const [error, setError] = useState('');
   const [copied, setCopied] = useState(false);
 
@@ -35,7 +35,7 @@ export default function Home() {
       const data = await response.json();
 
       if (!response.ok) {
-        throw new Error(data.error || 'Failed to summarize video');
+        throw new Error(data.error || 'Failed to transcribe video');
       }
 
       setResult(data);
@@ -48,10 +48,10 @@ export default function Home() {
   };
 
   const copyToClipboard = async () => {
-    if (!result?.summary) return;
+    if (!result?.transcript) return;
 
     try {
-      await navigator.clipboard.writeText(result.summary);
+      await navigator.clipboard.writeText(result.transcript);
       setCopied(true);
       setTimeout(() => setCopied(false), 2000);
     } catch (err) {
@@ -70,11 +70,11 @@ export default function Home() {
                 <Play className="w-6 h-6 sm:w-8 sm:h-8 text-white" />
               </div>
               <h1 className="text-2xl sm:text-3xl lg:text-4xl font-bold text-white text-center sm:text-left">
-                YouTube Summarizer
+                YouTube Transcriber
               </h1>
             </div>
             <p className="text-slate-300 text-base sm:text-lg px-4 sm:px-0">
-              Transform any YouTube video into a concise, AI-powered summary
+              Transform any YouTube video into a complete, AI-powered transcript
             </p>
           </div>
 
@@ -109,14 +109,14 @@ export default function Home() {
                 {isLoading ? (
                   <>
                     <div className="animate-spin rounded-full h-4 w-4 sm:h-5 sm:w-5 border-b-2 border-white"></div>
-                    <span className="hidden sm:inline">Summarizing...</span>
+                    <span className="hidden sm:inline">Transcribing...</span>
                     <span className="sm:hidden">Processing...</span>
                   </>
                 ) : (
                   <>
                     <Sparkles className="w-4 h-4 sm:w-5 sm:h-5" />
-                    <span className="hidden sm:inline">Summarize Video</span>
-                    <span className="sm:hidden">Summarize</span>
+                    <span className="hidden sm:inline">Transcribe Video</span>
+                    <span className="sm:hidden">Transcribe</span>
                   </>
                 )}
               </button>
@@ -139,7 +139,7 @@ export default function Home() {
               <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 sm:gap-4 mb-4 sm:mb-6">
                 <h3 className="text-lg sm:text-xl font-semibold text-white flex items-center gap-2">
                   <Sparkles className="w-4 h-4 sm:w-5 sm:h-5 text-purple-400" />
-                  Summary
+                  Transcript
                 </h3>
                 <button
                   onClick={copyToClipboard}
@@ -163,7 +163,7 @@ export default function Home() {
 
               <div className="bg-white/5 rounded-lg sm:rounded-xl p-4 sm:p-6 border border-white/10">
                 <p className="text-slate-100 leading-relaxed text-sm sm:text-base lg:text-lg whitespace-pre-wrap break-words">
-                  {result.summary}
+                  {result.transcript}
                 </p>
               </div>
             </div>
